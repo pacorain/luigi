@@ -6,7 +6,7 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - "${WIREGUARD_PORT}:${WIREGUARD_PORT}/udp"
+      - "${WIREGUARD_PORT}:51820/udp"
       - "32180:80"
       # - "443:443"
       - "${CLIENT_PASSTHROUGH_PORT}:${CLIENT_PASSTHROUGH_PORT}/tcp"
