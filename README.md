@@ -58,3 +58,4 @@ Here are some goals I'd like to accomplish:
 - [ ] Use certbot to generate SSL certificates for the server (I will need a plugin for wildcard domains)
 - [ ] Add Nginx Proxy Manager and/or authelia to the client
 - [ ] Make it easier to add port forwards to non-HTTP services
+- [ ] Use a keystore instead of a .env file?
