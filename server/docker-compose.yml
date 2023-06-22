@@ -7,12 +7,11 @@ services:
       - NET_ADMIN
     ports:
       - "${WIREGUARD_PORT}:51820/udp"
-      - "32180:80"
+      - "${HTTP_PORT_OVERRIDE:-80}:80"
       # - "443:443"
       - "${CLIENT_PASSTHROUGH_PORT}:${CLIENT_PASSTHROUGH_PORT}/tcp"
     environment:
       - SERVER_PRIVATE_KEY
       - CLIENT_PUBLIC_KEY
-      - WIREGUARD_PORT
       - CLIENT_PASSTHROUGH_PORT
       - CLIENT_PASSTHROUGH_ENABLED

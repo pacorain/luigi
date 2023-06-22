@@ -11,7 +11,7 @@ RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 CMD ["/init"]
 
 # Install nginx and wireguard
-RUN apt-get update && apt-get install -y nginx wireguard iptables
+RUN apt-get update && apt-get install -y nginx wireguard iptables iproute2
 
 # Copy root filesystem
 COPY rootfs /
