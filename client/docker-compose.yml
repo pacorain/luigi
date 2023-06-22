@@ -1,0 +1,36 @@
+services:
+  luigi-client:
+    build: .
+    image: registry.digitalocean.com/pacorain-homeinfra/luigi-client
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - ${WIREGUARD_PORT}:51820/udp
+    environment:
+      - CLIENT_PRIVATE_KEY
+      - SERVER_PUBLIC_KEY
+      - SERVER_ENDPOINT
+    networks:
+      luigi-internal:
+        ipv4_address: 10.5.0.2
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: always
+    ports:
+      - '${NGINX_HTTP_PORT:-80}:80'
+      - '${NGINX_ADMIN_PORT:-81}:81'
+      - '${NGINX_HTTPS_PORT:-443}:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      luigi-internal:
+        ipv4_address: 10.5.0.3 
+networks:
+  luigi-internal:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/24
+          gateway: 10.5.0.1
