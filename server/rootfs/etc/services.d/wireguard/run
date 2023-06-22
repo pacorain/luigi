@@ -1,0 +1,10 @@
+#!/command/with-contenv bash
+set -e
+
+# Set up NAT
+sysctl -w net.ipv4.ip_forward=1
+echo ${SERVER_PRIVATE_KEY} > /private/wg0.key
+wg-quick up wg0
+
+# Keep the container running
+sleep infinity

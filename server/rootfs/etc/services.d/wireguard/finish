@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Removing Wireguard"
+ip link set wg0 down
+ip link delete wg0

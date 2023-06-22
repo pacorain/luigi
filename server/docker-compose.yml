@@ -1,0 +1,18 @@
+services:
+  luigi:
+    build: .
+    image: registry.digitalocean.com/pacorain-homeinfra/luigi-server
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "${WIREGUARD_PORT}:${WIREGUARD_PORT}/udp"
+      - "32180:80"
+      # - "443:443"
+      - "${CLIENT_PASSTHROUGH_PORT}:${CLIENT_PASSTHROUGH_PORT}/tcp"
+    environment:
+      - SERVER_PRIVATE_KEY
+      - CLIENT_PUBLIC_KEY
+      - WIREGUARD_PORT
+      - CLIENT_PASSTHROUGH_PORT
+      - CLIENT_PASSTHROUGH_ENABLED
