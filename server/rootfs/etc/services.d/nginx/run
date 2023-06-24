@@ -2,9 +2,5 @@
 
 set -e
 
-# Disable the default site and enable the tunnel
-rm -f /etc/nginx/sites-enabled/default
-test -L /etc/nginx/sites-enabled/tunnel || ln -s /etc/nginx/sites-available/tunnel /etc/nginx/sites-enabled/tunnel
-
 # Start nginx in the foreground
 nginx -g "daemon off;"
