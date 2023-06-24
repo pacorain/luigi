@@ -7,4 +7,7 @@ echo ${SERVER_PRIVATE_KEY} > /private/wg0.key
 wg-quick up wg0
 
 # Keep the container running
-sleep infinity
+while true ; do 
+    sleep 10
+    wg show
+done
