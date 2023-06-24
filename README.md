@@ -10,6 +10,8 @@ Luigi has two components: the server and the client.
 
 Luigi server runs in the cloud. It is a reverse proxy that listens for incoming connections on a public IP address. When it receives a connection, it forwards the connection to the client.
 
+The server uses Nginx to serve the reverse proxy. It assumes the destination IP address is 10.5.0.3, which is the hard coded IP address of nginx-proxy-manager in the Docker network for the client. This is probably not the right way to do it, but it at least works for my setup.
+
 Luigi client runs on my home network. When the connection to the server is established, it serves a reverse proxy that forwards connections to my services. It also runs a Wireguard server that allows me to connect to my home network from anywhere.
 
 ## Deploying
@@ -59,3 +61,4 @@ Here are some goals I'd like to accomplish:
 - [ ] Add Nginx Proxy Manager and/or authelia to the client
 - [ ] Make it easier to add port forwards to non-HTTP services
 - [ ] Use a keystore instead of a .env file?
+- [ ] Improve networking -- I have lots of IP addresses hard-coded and I'm not sure if it's the best way to do it
