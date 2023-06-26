@@ -2,7 +2,7 @@ services:
   luigi-client:
     build: .
     image: registry.digitalocean.com/pacorain-homeinfra/luigi-client
-    name: luigi-client
+    container_name: luigi-client
     privileged: true
     cap_add:
       - SYS_ADMIN

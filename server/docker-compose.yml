@@ -5,7 +5,7 @@ services:
     image: registry.digitalocean.com/pacorain-homeinfra/luigi-server
     privileged: true
     restart: unless-stopped
-    name: luigi-server
+    container_name: luigi-server
     cap_add:
       - NET_ADMIN
     ports:
