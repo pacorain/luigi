@@ -4,6 +4,7 @@ services:
     image: registry.digitalocean.com/pacorain-homeinfra/luigi-client
     privileged: true
     cap_add:
+      - SYS_ADMIN
       - NET_ADMIN
     ports:
       - ${WIREGUARD_PORT}:51820/udp
