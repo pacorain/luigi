@@ -2,6 +2,7 @@ services:
   luigi-client:
     build: .
     image: registry.digitalocean.com/pacorain-homeinfra/luigi-client
+    name: luigi-client
     privileged: true
     cap_add:
       - SYS_ADMIN
@@ -15,6 +16,7 @@ services:
     networks:
       luigi-internal:
         ipv4_address: 10.5.0.2
+    restart: unless-stopped
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: always
