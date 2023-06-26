@@ -2,5 +2,13 @@
 
 set -e
 
+# Enable client passthrough if CLIENT_PASSTHROUGH_ENABLED is set to true, yes, or 1
+if [[ "${CLIENT_PASSTHROUGH_ENABLED}" =~ ^[TtYy1] ]]; then
+    ln -sf /etc/nginx/stream.d-available/client-passthrough.conf /etc/nginx/stream.d/client-passthrough.conf
+else
+    # Delete the file if it exists in case of improper shutdown
+    rm -f /etc/nginx/stream.d/client-passthrough.conf
+fi
+
 # Start nginx in the foreground
 nginx -g "daemon off;"

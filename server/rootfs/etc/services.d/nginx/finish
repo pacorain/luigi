@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Disable the passthrough by default
+rm -f /etc/nginx/stream.d/client-passthrough.conf

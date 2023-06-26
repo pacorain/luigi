@@ -7,10 +7,10 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - "${WIREGUARD_PORT}:51820/udp"
+      - "${WIREGUARD_PORT:-51820}:51820/udp"
       - "${HTTP_PORT_OVERRIDE:-80}:80"
       # - "443:443"
-      - "${CLIENT_PASSTHROUGH_PORT}:${CLIENT_PASSTHROUGH_PORT}/tcp"
+      - "${CLIENT_PASSTHROUGH_PORT:-51821}:51821/udp"
     environment:
       - SERVER_PRIVATE_KEY
       - CLIENT_PUBLIC_KEY
