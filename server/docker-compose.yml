@@ -11,10 +11,33 @@ services:
     ports:
       - "${WIREGUARD_PORT:-51820}:51820/udp"
       - "${HTTP_PORT_OVERRIDE:-80}:80"
-      # - "443:443"
+      - "${HTTPS_PORT_OVERRIDE:-443}:443"
       - "${CLIENT_PASSTHROUGH_PORT:-51821}:51821/udp"
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
     environment:
       - SERVER_PRIVATE_KEY
       - CLIENT_PUBLIC_KEY
       - CLIENT_PASSTHROUGH_ENABLED
       - OP_SERVICE_ACCOUNT_TOKEN
+  certbot:
+    image: certbot/dns-cloudflare
+    restart: unless-stopped
+    container_name: luigi-certbot
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    command: >-
+      certonly --dns-cloudflare -m email --dns-cloudflare-credentials /etc/letsencrypt/cloudflare_credentials.ini
+        --agree-tos
+        --dns-cloudflare-propagation-seconds 120
+        -m "hey@paco.wtf"
+        -n
+        -d *.mi.rainwater.family
+        -d mi.rainwater.family
+        -d home.rainwater.family
+        -d *.paco.wtf
+volumes:
+  certbot_conf:
+  certbot_www:
