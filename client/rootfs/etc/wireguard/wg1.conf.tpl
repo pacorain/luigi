@@ -5,7 +5,3 @@ PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEP
 PostUp = wg set %i private-key /private/wg1.key listen-port 51820 peer ${SERVER_PUBLIC_KEY} endpoint ${SERVER_ENDPOINT} allowed-ips 172.27.66.1 persistent-keepalive 10 
 PostDown = iptables -D FORWARD -i wg1 -j ACCEPT; iptables -D FORWARD -o wg1 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
 
-[Peer]
-# TODO: Find somewhere to store this other than git
-PublicKey = E88wT0CmG6u1CASdF3hTxLZ48PvVejgTIDZE3uUOlA0=
-AllowedIPs = 172.27.66.5/32
