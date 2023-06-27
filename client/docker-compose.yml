@@ -8,7 +8,7 @@ services:
       - SYS_ADMIN
       - NET_ADMIN
     ports:
-      - ${WIREGUARD_PORT}:51820/udp
+      - ${WIREGUARD_PORT:-51820}:51820/udp
     environment:
       - CLIENT_PRIVATE_KEY
       - SERVER_PUBLIC_KEY
