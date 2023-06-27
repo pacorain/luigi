@@ -13,6 +13,7 @@ services:
       - CLIENT_PRIVATE_KEY
       - SERVER_PUBLIC_KEY
       - SERVER_ENDPOINT
+      - OP_SERVICE_ACCOUNT_TOKEN
     networks:
       luigi-internal:
         ipv4_address: 10.5.0.2
