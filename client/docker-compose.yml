@@ -28,9 +28,28 @@ services:
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+      - ./nginx-snippets:/config/nginx/snippets
     networks:
       luigi-internal:
         ipv4_address: 10.5.0.3 
+  authelia:
+    container_name: authelia
+    image: authelia/authelia
+    restart: unless-stopped
+    networks:
+      luigi-internal:
+        ipv4_address: 10.5.0.4
+    expose:
+      - 9091
+    volumes:
+      - ${PWD}/data/authelia/config:/config
+    environment:
+      TZ: 'America/New_York'
+  authelia_config:
+    conainer_name: authelia_config
+    image: alpine
+    volumes:
+      - ${PWD}/data/authelia/config:/config
 networks:
   luigi-internal:
     driver: bridge
